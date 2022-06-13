@@ -6,29 +6,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
     /**variables globales **/
-    View tv_email;
-    View tv_password;
+    TextView tv_email;
+    TextView tv_password;
     Button btn_Register;
+    TextView tv_titre;
+    FirebaseAuth userAuth;
 
     /** initialisation **/
     private void initUi(){
         tv_email=findViewById(R.id.tv_Email);
         tv_password=findViewById(R.id.tv_Password);
-        btn_Register=findViewById(R.id.btn_Register);
-    }
-
-    public void register(View view){
-
+        tv_titre=findViewById(R.id.tv_titre);
+        btn_Register=findViewById(R.id.btn_confirm);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login_register);
 
         /** recuperation de la valeur de l'intent **/
         Intent intent = getIntent();
@@ -36,6 +38,19 @@ public class RegisterActivity extends AppCompatActivity {
         setTitle(titre);
 
         initUi();
+        btn_Register.setText(titre);
+        tv_titre.setText(titre);
+
+        btn_Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // createUserWithEmailAndPassword
+
+                Intent intent1 = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent1);
+            }
+        });
 
     }
 }
